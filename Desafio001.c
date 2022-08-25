@@ -1,28 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define max 10 
+#define max 10
 
 int tipoMatriz();
 int validaNum(int escolhaMatriz);
 int linhaMatriz();
 int colunaMatriz(int i);
+char repete();
 void matrizOrdemUser();
 void montaMatrizOrdem(int i, int j);
 void montaMatrizQuadrada(int b);
 
 
-int main() 
+int main()
 {
+    char loop = ' ';
+    do{
 
-
-    int escolha = tipoMatriz(); //Variável 
+    int escolha = tipoMatriz(); //Variável
 
     if(escolha == 0) {
-        
+
         matrizQuadrada();
     } if (escolha == 1) {
         matrizOrdemUser();
-    } 
+    }
+    loop = repete();
+    }while(loop == ' ');
+
 
     getchar();
     return 0;
@@ -30,8 +35,8 @@ int main()
 }
 
 int tipoMatriz() //Captura o tipo da matriz.
-{ 
-    
+{
+
     int escolhaMatriz;
         printf("\n\n\n\tEscolha se sera matriz quadrada[ixi] ou matriz A[lxc]. ");
         printf("\n\n\t\tPara 0 - Q[ixi]\t| 1 - A[lxc]: ");
@@ -48,7 +53,7 @@ int validaNum(int escolhaMatriz) //Restringe a escolha -- ERRO com caractéres.
 
     do{
             if(escolhaValida != 0 && escolhaValida != 1) {
-              
+
                     erroNum = 9;
                     printf("\n\n\n\tEscolha se sera matriz quadrada[ixi] ou matriz A[lxc]. ");
                     printf("\n\n\t\tPara 0 - Q[ixi]\t| 1 - A[lxc]: ");
@@ -58,14 +63,14 @@ int validaNum(int escolhaMatriz) //Restringe a escolha -- ERRO com caractéres.
             }
         }while(erroNum != 0);
 
-    
-    return escolhaValida; 
+
+    return escolhaValida;
 }
 
-void matrizOrdemUser() 
+void matrizOrdemUser()
 {
     printf("\n\n\t\t----***Matriz Ordem***----");
-    
+
     int i, j;
 
     i = linhaMatriz();
@@ -75,7 +80,7 @@ void matrizOrdemUser()
 
 int linhaMatriz() //Quantidade de linhas.
 {
-    
+
     int linha;
 
     printf("\n\n\tDigite o numero de linhas[10 linha max]: ");
@@ -126,10 +131,10 @@ int colunaMatriz(int i) //Quantidade de colunas
 }
 
 void montaMatrizOrdem(int i, int j) //Monta a matriz
-{ 
+{
     int linha,coluna;
     float matriz[i][j];
-     
+
     printf("\n\n\t\t\t<>Matriz[%dx%d]<>", i ,j);
 
     for(linha = 0; linha < i; linha++) {
@@ -138,7 +143,7 @@ void montaMatrizOrdem(int i, int j) //Monta a matriz
             scanf("%f", &matriz[linha][coluna]);
         }
     }
-    
+
     printf("\n");
 
     for(linha = 0; linha < i; linha++) {
@@ -151,19 +156,18 @@ void montaMatrizOrdem(int i, int j) //Monta a matriz
 
 }
 
-void matrizQuadrada() 
+void matrizQuadrada()
 {
     int b;
 
     printf("\n\n\t\t----***Matriz Quadrada***----");
     b = linhaColunaMatriz();
-    
     montaMatrizQuadrada(b);
 
 
 }
 
-int linhaColunaMatriz() 
+int linhaColunaMatriz()
 {
 
     int linhaColuna;
@@ -185,9 +189,10 @@ int linhaColunaMatriz()
 
 }
 
-void montaMatrizQuadrada(int b) { //monta a matriz Quadrada
+void montaMatrizQuadrada(int b) //monta a matriz Quadrada
+{
 
-    int lc = b-1; 
+    int lc = b-1;
     int linha,coluna;
     float matrizQ[b][b];
 
@@ -218,15 +223,36 @@ void montaMatrizQuadrada(int b) { //monta a matriz Quadrada
         printf("\t\t");
         for( coluna = 0; coluna < b; coluna++) {
             if(linha == coluna){
-            
+
                 printf("%.2f\t", matrizQ[linha][coluna]);
 
             } else {
-                printf("$$$\t");            
+                printf("$$$\t");
             }
         }
         printf("\n");
     }
+
+    //----------------Transversa----------------
+    printf("\n");
+    printf("\n\n\t\t\t<>Transversa<>\n");
+    printf("\n");
+
+    for(linha = 0; linha < b ; linha++) {
+        printf("\t\t");
+        for(coluna = 0; coluna < b; coluna++){
+            if(linha < coluna){
+               printf("%.2f\t", matrizQ[linha][coluna]);
+            } if(coluna == linha){
+                printf("%.2f\t", matrizQ[linha][coluna]);
+            } if(linha > coluna) {
+                printf("$$$\t");
+            }
+
+        }
+        printf("\n");
+    }
+
 
     //----------------Diagonal Secundária----------------
     printf("\n");
@@ -243,3 +269,29 @@ void montaMatrizQuadrada(int b) { //monta a matriz Quadrada
         }
         printf("\n");
     }
+
+
+//----------------Transversa----------------
+    printf("\n");
+    printf("\n\n\t\t\t<>Transversa<>\n");
+    printf("\n");
+    for(linha = 0; linha < b; linha++) {
+        printf("\t\t");
+        for(coluna = 0; coluna < b; coluna++) {
+
+                printf("%.2f\t", matrizQ[coluna][linha]);
+
+        }
+        printf("\n");
+    }
+}
+
+char repete() //Mantem o programa em loop
+{
+    char varLoop;
+    printf("\n\nPara continuar a operar digite: ");
+    printf("\n[SPACE+ENTER]Continuar\t[TECLA+ENTER]Finaliza");
+    scanf("%c%*c", &varLoop);
+
+    return varLoop;
+}
