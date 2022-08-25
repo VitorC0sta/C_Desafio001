@@ -290,7 +290,7 @@ char repete() //Mantem o programa em loop
 {
     char varLoop;
     printf("\n\nPara continuar a operar digite: ");
-    printf("\n[SPACE+ENTER]Continuar\t[TECLA+ENTER]Finaliza");
+    printf("\n[SPACE+ENTER]Continuar\t[TECLA+ENTER]Finalizar: ");
     scanf("%c%*c", &varLoop);
 
     return varLoop;
