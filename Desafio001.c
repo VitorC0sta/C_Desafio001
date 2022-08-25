@@ -144,8 +144,9 @@ void montaMatrizOrdem(int i, int j) //Monta a matriz
     printf("\n");
 
     for(linha = 0; linha < i; linha++) {
+        printf("\t\t");
         for( coluna = 0; coluna < j; coluna++) {
-            printf("\t\t%.2f\t", matriz[linha][coluna]);
+            printf("%.2f\t", matriz[linha][coluna]);
         }
         printf("\n");
     }
