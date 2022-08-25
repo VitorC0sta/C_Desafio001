@@ -8,23 +8,21 @@ int linhaMatriz();
 int colunaMatriz(int i);
 void matrizOrdemUser();
 void montaMatrizOrdem(int i, int j);
+void montaMatrizQuadrada(int b);
 
 
 int main() 
 {
 
 
-
     int escolha = tipoMatriz(); //Variável 
 
     if(escolha == 0) {
-        printf("%d", escolha);
+        
+        matrizQuadrada();
     } if (escolha == 1) {
         matrizOrdemUser();
     } 
-
-
-
 
     getchar();
     return 0;
@@ -152,3 +150,96 @@ void montaMatrizOrdem(int i, int j) //Monta a matriz
     }
 
 }
+
+void matrizQuadrada() 
+{
+    int b;
+
+    printf("\n\n\t\t----***Matriz Quadrada***----");
+    b = linhaColunaMatriz();
+    
+    montaMatrizQuadrada(b);
+
+
+}
+
+int linhaColunaMatriz() 
+{
+
+    int linhaColuna;
+
+    printf("\n\n\tDigite o numero de Linhas/Colunas[10 max]: ");
+    scanf("%d", &linhaColuna);
+
+    if(linhaColuna > max) {
+        do{
+
+         printf("\n\n\t%d linhas - Excedeu o limite[%d] de linhas/colunas", linhaColuna, max);
+         printf("\n\tDigite uma nova quantidade: ");
+         scanf("%d%*c", &linhaColuna);
+
+        } while (linhaColuna > max);
+    }
+
+    return linhaColuna;
+
+}
+
+void montaMatrizQuadrada(int b) { //monta a matriz Quadrada
+
+    int lc = b-1; 
+    int linha,coluna;
+    float matrizQ[b][b];
+
+    for(linha = 0; linha < b; linha++){
+        printf("\n\n\tDigite os %d valores da matriz na linha %d: ", b, linha);
+        for(coluna = 0; coluna < b; coluna++) {
+            scanf("%f%*c", &matrizQ[linha][coluna]);
+        }
+    }
+
+    //----------------Matriz Completa------------------
+    printf("\n");
+    printf("\n\n\t\t\t<>Matriz[%dx%d]<>\n", b, b);
+    printf("\n");
+    for(linha = 0; linha < b; linha++) {
+        printf("\t\t");
+        for( coluna = 0; coluna < b; coluna++) {
+            printf("%.2f\t", matrizQ[linha][coluna]);
+        }
+        printf("\n");
+    }
+
+    //----------------Diagonal Principal----------------
+    printf("\n");
+    printf("\n\n\t\t\t<>Diagonal Principal<>\n");
+    printf("\n");
+    for(linha = 0; linha < b; linha++) {
+        printf("\t\t");
+        for( coluna = 0; coluna < b; coluna++) {
+            if(linha == coluna){
+            
+                printf("%.2f\t", matrizQ[linha][coluna]);
+
+            } else {
+                printf("$$$\t");            
+            }
+        }
+        printf("\n");
+    }
+
+    //----------------Diagonal Secundária----------------
+    printf("\n");
+    printf("\n\n\t\t\t<>Diagonal Secundaria<>\n");
+    printf("\n");
+    for(linha = 0; linha < b; linha++) {
+        printf("\t\t");
+        for(coluna = 0; coluna < b; coluna++) {
+            if(linha + coluna == lc) {
+                printf("%.2f\t", matrizQ[linha][coluna]);
+            } else {
+                printf("$$$\t");
+            }
+        }
+        printf("\n");
+    }
