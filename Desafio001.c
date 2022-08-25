@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #define max 10
 
-int tipoMatriz();
-int validaNum(int escolhaMatriz);
+char tipoMatriz();
+int validaNum(char escolhaMatriz);
 int linhaMatriz();
 int colunaMatriz(int i);
 char repete();
@@ -17,12 +17,12 @@ int main()
     char loop = ' ';
     do{
 
-    int escolha = tipoMatriz(); //Variável
+    char escolha = tipoMatriz(); //Variável
 
-    if(escolha == 0) {
+    if(escolha == '0') {
 
         matrizQuadrada();
-    } if (escolha == 1) {
+    } if (escolha == '1') {
         matrizOrdemUser();
     }
     loop = repete();
@@ -34,34 +34,35 @@ int main()
 
 }
 
-int tipoMatriz() //Captura o tipo da matriz.
+char tipoMatriz() //Captura o tipo da matriz.
 {
 
-    int escolhaMatriz;
+    char escolhaMatriz;
         printf("\n\n\n\tEscolha se sera matriz quadrada[ixi] ou matriz A[lxc]. ");
         printf("\n\n\t\tPara 0 - Q[ixi]\t| 1 - A[lxc]: ");
-        scanf("%d%*c", &escolhaMatriz);
+        scanf("%c%*c", &escolhaMatriz);
+        
         escolhaMatriz = validaNum(escolhaMatriz);
-
+        
     return escolhaMatriz;
 }
 
-int validaNum(int escolhaMatriz) //Restringe a escolha -- ERRO com caractéres.
+int validaNum(char escolhaMatriz) //Restringe a escolha
 {
-    int escolhaValida = escolhaMatriz;
-    int erroNum = 0;
+    char escolhaValida = escolhaMatriz;
+    char erroNum = '0';
 
     do{
-            if(escolhaValida != 0 && escolhaValida != 1) {
+            if(escolhaValida != '0' && escolhaValida != '1') {
 
                     erroNum = 9;
                     printf("\n\n\n\tEscolha se sera matriz quadrada[ixi] ou matriz A[lxc]. ");
                     printf("\n\n\t\tPara 0 - Q[ixi]\t| 1 - A[lxc]: ");
-                    scanf("%d%*c", &escolhaValida);
-            } else {
-                erroNum =0;
+                    scanf("%c%*c", &escolhaValida);
+            } if(escolhaValida == '0' || escolhaValida == '1') {
+                erroNum = '0';
             }
-        }while(erroNum != 0);
+        }while(erroNum != '0');
 
 
     return escolhaValida;
